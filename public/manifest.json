@@ -1,0 +1,11 @@
+{
+    "name": "EspantaPajaros",
+    "short_name": "espanta-pajaros",
+    "theme_color": "#35155D",
+    "background_color": "#ffffff",
+    "display": "standalone",
+    "orientation": "portrait",
+    "scope": "/",
+    "start_url": "/",
+    "splash_pages": null
+  }

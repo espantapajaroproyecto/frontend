@@ -3,11 +3,11 @@ import axios from "axios";
 export async function login(dni , password) {
   try {
     
-    const response = await axios.post(`https://q6rabpnao1.execute-api.us-east-1.amazonaws.com/dev/login`, {
-      body: {
-        username: "test",
-        password: "123"
-      },
+    const response = await axios.post(`https://r371qrwuoj.execute-api.us-east-1.amazonaws.com/dev/login`, {
+      body: JSON.stringify({
+        dni: dni,
+        contrasenia: password
+      }),
       headers: {
         "Content-Type": "application/json"
       }

@@ -1,5 +1,6 @@
 // app/login/page.tsx
 "use client";
+import { jwtDecode } from "jwt-decode";
 
 import Link from "next/link";
 import React from "react";
@@ -15,8 +16,32 @@ export default function Page() {
 
   const handleLogin = async (datos: Record<string, string>) => {
     try {
+      
+      console.log(datos);
       const resultado = await login(datos.dni, datos.password);
+      
       console.log("Resultado login:", resultado);
+      const token = resultado.token;
+      localStorage.setItem("token", token);
+
+      interface DecodedToken {
+      id: number;
+      rol: string;
+      exp: number;
+    }
+
+    const decoded: DecodedToken = jwtDecode(token);
+    localStorage.setItem("userRole", decoded.rol);
+
+    //Opcional: redirigir según el rol
+    if (decoded.rol === "admin") {
+      window.location.href = "/dashboard/admin";
+    } else if (decoded.rol === "profesor") {
+      window.location.href = "/dashboard/profesor";
+    } else if (decoded.rol === "alumno") {
+      window.location.href = "/dashboard/alumno";
+    }
+
     } catch (error) {
       console.error("Error en login:", error);
     }
